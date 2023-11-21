@@ -1,0 +1,12 @@
+# Ignore Python bytecode files, caches, and virtual environment
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+venv/
+env/
+.venv/
+
+#igone downloaded files
+data/
+downloads/
