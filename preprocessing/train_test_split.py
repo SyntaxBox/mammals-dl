@@ -3,7 +3,8 @@ import os
 import shutil
 import random
 
-MAMMALS_PATH = Path('data/mammals')
+DATA_PATH = Path('data')
+MAMMALS_PATH = DATA_PATH / 'mammals'
 
 
 def load_dataset():
@@ -14,7 +15,7 @@ def load_dataset():
 
 def train_test_split():
     # Create the dataset directory if it doesn't exist
-    dataset_dir = MAMMALS_PATH / 'dataset'
+    dataset_dir = DATA_PATH / 'dataset'
     if not dataset_dir.exists():
         dataset_dir.mkdir()
     else:
@@ -46,6 +47,3 @@ def train_test_split():
 
         # Copy the image to the appropriate directory
         shutil.copy(image_path, destination / image_path.name)
-
-
-train_test_split()
