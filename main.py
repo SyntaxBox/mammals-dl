@@ -12,6 +12,8 @@ def main():
     download_dataset()
     train_test_split()
     class_names, class_dict, test_dataloader, train_dataloader, train_data, test_data = transforms
+    label, img = next(iter(test_dataloader))
+    print(label.shape, img.shape)
     model_0 = ImageModelV0(input_shape=3, hidden_units=128,
                            output_shape=len(class_names))
     eval(data_loader=train_dataloader, model=model_0)
