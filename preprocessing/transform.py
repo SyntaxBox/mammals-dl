@@ -2,6 +2,7 @@ from torchvision import datasets
 from pathlib import Path
 from torch.utils.data import DataLoader
 from torchvision import transforms, datasets
+import os
 # import matplotlib.pyplot as plt
 
 data_path = Path("data")
@@ -10,6 +11,8 @@ image_path = data_path / 'dataset'
 train_dir = image_path / "train"
 test_dir = image_path / "test"
 
+BATCH_SIZE = 32
+NUM_WORKERS = os.cpu_count()
 
 # Write transform for image
 data_transform = transforms.Compose([
@@ -64,15 +67,15 @@ class_dict = train_data.class_to_idx
 
 # Turn train and test Datasets into DataLoaders
 train_dataloader = DataLoader(dataset=train_data,
-                              batch_size=1,  # how many samples per batch?
+                              batch_size=BATCH_SIZE,  # how many samples per batch?
                               # how many subprocesses to use for data loading? (higher = more)
-                              num_workers=1,
+                              num_workers=NUM_WORKERS,
                               shuffle=True)  # shuffle the data?
 
 test_dataloader = DataLoader(dataset=test_data,
-                             batch_size=1,
-                             num_workers=1,
+                             batch_size=BATCH_SIZE,
+                             num_workers=NUM_WORKERS,
                              shuffle=False)  # don't usually need to shuffle testing data
 
-transforms = {class_names, class_dict, test_dataloader,
-              train_dataloader, train_data, test_data}
+transforms = [class_names, class_dict, test_dataloader,
+              train_dataloader, train_data, test_data]
