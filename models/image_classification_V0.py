@@ -30,18 +30,17 @@ class ImageModelV0(nn.Module):
         )
         self.classifier = nn.Sequential(
             nn.Flatten(),
-            # Where did this in_features shape come from?
-            # It's because each layer of our network compresses and changes the shape of our inputs data.
-            nn.Linear(in_features=hidden_units*16*16,
-                      out_features=output_shape)
+            nn.Linear(in_features=hidden_units*32 *
+                      32, out_features=output_shape)
         )
 
     def forward(self, x: torch.Tensor):
-        x = self.conv_block_1(x)
-        # print(x.shape)
-        x = self.conv_block_2(x)
-        # print(x.shape)
-        x = self.classifier(x)
-        # print(x.shape)
-        return x
-        # return self.classifier(self.conv_block_2(self.conv_block_1(x))) # <- leverage the benefits of operator fusion
+        # x = self.conv_block_1(x)
+        # # print('conv1', x.shape)
+        # x = self.conv_block_2(x)
+        # # print('conv2', x.shape)
+        # x = self.classifier(x)
+        # # print(x.shape)
+        # return x
+        # <- leverage the benefits of operator fusion
+        return self.classifier(self.conv_block_2(self.conv_block_1(x)))
